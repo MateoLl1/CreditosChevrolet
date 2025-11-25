@@ -1,0 +1,61 @@
+############################
+# Build / compilación
+############################
+bin/
+obj/
+out/
+
+############################
+# IDEs / herramientas
+############################
+.vs/
+.vscode/
+*.user
+*.suo
+*.userprefs
+*.csproj.user
+
+############################
+# Logs
+############################
+*.log
+logs/
+
+############################
+# Archivos temporales
+############################
+*.tmp
+*.temp
+*.bak
+*.swp
+*.DS_Store
+Thumbs.db
+
+############################
+# Publicaciones
+############################
+/publish/
+/artifacts/
+
+############################
+# Base de datos local (si llegas a usar archivos)
+############################
+*.mdf
+*.ldf
+*.sqlite
+*.db
+
+############################
+# Configuración sensible
+############################
+# En una prueba técnica puedes subir appsettings.json,
+# pero si usas claves reales de Gmail o similares,
+# lo ideal es que vayan en secretos de usuario o variables de entorno.
+# Aquí se ignoran variantes "locales" para uso personal.
+appsettings.*.local.json
+appsettings.Local.json
+
+############################
+# Otros
+############################
+node_modules/
