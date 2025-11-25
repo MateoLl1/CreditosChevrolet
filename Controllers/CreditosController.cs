@@ -14,13 +14,13 @@ namespace CreditosChevrolet.Controllers
   public class CreditosController : ControllerBase
   {
     private static readonly HashSet<string> EstadosPermitidos = new HashSet<string>
-        {
-            "APROBADO",
-            "NEGADO",
-            "CONDICIONADO",
-            "REQUIERE_DOCUMENTOS",
-            "EN_PROCESO"
-        };
+    {
+      "APROBADO",
+      "NEGADO",
+      "CONDICIONADO",
+      "REQUIERE_DOCUMENTOS",
+      "EN_PROCESO"
+    };
 
     private readonly ICreditoService _creditoService;
     private readonly ILogger<CreditosController> _logger;
@@ -86,6 +86,14 @@ namespace CreditosChevrolet.Controllers
         if (string.IsNullOrWhiteSpace(dto.Observacion))
         {
           return BadRequest("La observación es obligatoria cuando el estado es NEGADO.");
+        }
+      }
+
+      if (dto.Estado == "REQUIERE_DOCUMENTOS")
+      {
+        if (string.IsNullOrWhiteSpace(dto.Observacion))
+        {
+          return BadRequest("La observación es obligatoria cuando el estado es REQUIERE_DOCUMENTOS.");
         }
       }
 

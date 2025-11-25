@@ -88,11 +88,27 @@ namespace CreditosChevrolet.Services
           .Select(r => _mapper.Map<RespuestaCreditoItemDto>(r))
           .ToList();
 
+      DateTime? proximaConsulta = null;
+      if (solicitud.MinutosReintento.HasValue)
+      {
+        var ultimaEnProceso = respuestas
+            .Where(r => r.Estado == "EN_PROCESO")
+            .OrderByDescending(r => r.FechaRespuesta)
+            .FirstOrDefault();
+
+        if (ultimaEnProceso != null)
+        {
+          proximaConsulta = ultimaEnProceso.FechaRespuesta.AddMinutes(solicitud.MinutosReintento.Value);
+        }
+      }
+
       var detalle = new RespuestaCreditoDetalleDto
       {
         NumeroSolicitud = solicitud.NumeroSolicitud,
         AsesorId = solicitud.AsesorId,
         FechaSolicitud = solicitud.FechaSolicitud,
+        MinutosReintento = solicitud.MinutosReintento,
+        ProximaConsulta = proximaConsulta,
         Respuestas = respuestasDto
       };
 
