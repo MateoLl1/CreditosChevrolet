@@ -77,19 +77,21 @@ En `appsettings.json`:
 ### Opcion A) Correr migraciones (No tiene registros)
 
 ```json
-  dotnet ef database update
+dotnet ef database update
 ```
+
+Importante para que funcione este comando debe tener ef instalado. Sino lo puede instalar con este comando `dotnet tool install --global dotnet-ef`
 
 ### Opcion B) Usando script SQL (Esquema con registros prueba)
 
 ```json
-  sql/01_schema_y_datos.sql
+sql/01_schema_y_datos.sql
 ```
 
 ## 3. Ejecución de la API
 
 ```json
-  dotnet run
+dotnet run
 ```
 
 ### La API expone Swagger en:
@@ -104,7 +106,7 @@ En `appsettings.json`:
 ### Datos de prueba rápidos (SQL)
 
 ```sql
-USE CreditosChevroletDb;
+USE CreditosChevrolet;
 GO
 
 -- Solicitudes de crédito de ejemplo
@@ -190,8 +192,8 @@ Respuesta
 
 ## 7. Notificación por correo (Gmail)
 
-### Haz un POST válido (por ejemplo con SOL-APROBADO-001).
+### Haz un POST válido (por ejemplo con SOL-APROBADO-001). Se enviara un correo a `magusoliva80@gmail.com` con la notificacion
 
-## 7. Logs en la terminal
+## 8. Logs en la terminal
 
 ### En la misma terminal donde corre el `dotner run` aparecen los logs de los resultados de las ejecuciones.
