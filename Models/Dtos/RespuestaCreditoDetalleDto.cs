@@ -9,5 +9,9 @@ namespace CreditosChevrolet.Models.Dtos
     public int AsesorId { get; set; }
     public DateTime FechaSolicitud { get; set; }
     public List<RespuestaCreditoItemDto> Respuestas { get; set; } = new List<RespuestaCreditoItemDto>();
+
+    public int? MinutosReintento { get; set; }
+    public DateTime? ProximaConsulta { get; set; }
+
   }
 }
