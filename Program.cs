@@ -4,6 +4,7 @@ using CreditosChevrolet.Repository.IRepository;
 using CreditosChevrolet.Repository;
 using CreditosChevrolet.Services.Interfaces;
 using CreditosChevrolet.Services;
+using CreditosChevrolet.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -15,6 +16,9 @@ builder.Services.AddScoped<ISolicitudCreditoRepository, SolicitudCreditoReposito
 builder.Services.AddScoped<IRespuestaCreditoFinancieraRepository, RespuestaCreditoFinancieraRepository>();
 builder.Services.AddScoped<INotificacionAsesorRepository, NotificacionAsesorRepository>();
 builder.Services.AddScoped<ICreditoService, CreditoService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
+
+builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
 
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddControllers();
@@ -22,8 +26,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
-
-
 
 if (app.Environment.IsDevelopment())
 {

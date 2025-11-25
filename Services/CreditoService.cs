@@ -16,6 +16,7 @@ namespace CreditosChevrolet.Services
     private readonly ISolicitudCreditoRepository _solicitudRepo;
     private readonly IRespuestaCreditoFinancieraRepository _respuestaRepo;
     private readonly INotificacionAsesorRepository _notificacionRepo;
+    private readonly IEmailService _emailService;
     private readonly IMapper _mapper;
     private readonly ILogger<CreditoService> _logger;
 
@@ -23,12 +24,14 @@ namespace CreditosChevrolet.Services
         ISolicitudCreditoRepository solicitudRepo,
         IRespuestaCreditoFinancieraRepository respuestaRepo,
         INotificacionAsesorRepository notificacionRepo,
+        IEmailService emailService,
         IMapper mapper,
         ILogger<CreditoService> logger)
     {
       _solicitudRepo = solicitudRepo;
       _respuestaRepo = respuestaRepo;
       _notificacionRepo = notificacionRepo;
+      _emailService = emailService;
       _mapper = mapper;
       _logger = logger;
     }
@@ -69,6 +72,9 @@ namespace CreditosChevrolet.Services
       await _notificacionRepo.AddAsync(notificacion);
 
       await _respuestaRepo.SaveChangesAsync();
+
+      var subject = $"Respuesta de crédito {dto.Estado} - {dto.NumeroSolicitud}";
+      await _emailService.SendAsync(subject, mensajeNotificacion);
 
       _logger.LogInformation("Respuesta procesada para solicitud {NumeroSolicitud} con estado {Estado}", dto.NumeroSolicitud, dto.Estado);
 
